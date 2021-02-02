@@ -1,0 +1,23 @@
+<div>
+    <input 
+      type="text" 
+      [formControl]="searchBar"
+      maxlength="256">
+    <button (click)="fetchSearchResults(1)">Submit</button>
+
+    <li *ngFor="let user of users; index as i; trackBy: trackById" 
+      class="user-link" (click)="navigateToUserGithub(user)">
+      {{ user.login }}
+
+    </li>
+
+
+    <p *ngIf="totalResults">Total Results: {{ totalResults }}</p>
+
+    <ng-container *ngIf="totalPages">
+      <button (click)="previousPage()">Previous Page</button>
+      <button *ngFor="let page of totalPages; index as i; trackBy: trackByIndex"
+        (click)="queryByPage(i + 1)">{{ i + 1 }}</button>
+      <button (click)="nextPage()">Next Page</button>
+    </ng-container>
+</div>
